@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function createPerson(p_name,p_sex,p_run) {
+
+        var tempPerson = new Object();
+        
+        tempPerson.name = p_name;
+        tempPerson.sex = p_sex;
+        tempPerson.run = p_run;
+        return tempPerson;
+        }
+        
+        var obj3 = createPerson("刘备","男",new Function("console.log('跑')"));
+        console.log(obj3);
+        
+        var obj4 = createPerson("张飞","男",new Function("console.log('跳')"));
+
+        //构造函数创建
+        function Student(name,sex) {
+            this.name = name;  //第一个name是属性，第二个name是参数
+            this.sex = sex;
+
+            this.run = function(){
+                console.log("跑");
+            }
+        }
+        var obj2 = new Student("盲僧","男");
+       // console.log(obj2);
+
+
+
+    //使用原型创建
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let  spMenuItem = document.querySelectorAll(".spMenuItem");
+		//点击事件
+		for (let i = 0; i < spMenuItem.length; i++) {  //操作每个当前点击的菜单
+			let spMenu = spMenuItem[i].querySelector(".spMenu");
+			let subMenuBox = spMenuItem[i].querySelector(".subMenuBox");
+			let folder = spMenuItem[i].getElementsByTagName("i")[0];
+
+			spMenu.onclick = function(){
+				if(subMenuBox.style.display == 'block'){
+					subMenuBox.style.display = "none";
+					folder.className = "fa fa-folder";
+					spMenuItem[i].className = "spMenuItem";
+				}else{
+					subMenuBox.style.display = "block";
+					folder.className = "fa fa-folder-open";
+					spMenuItem[i].className = "spMenuItem active";
+				}
+
+
+			}	
+		}
+    </script>
+</body>
+</html>

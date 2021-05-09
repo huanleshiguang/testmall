@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div><a href=""><img src="img/tanke.png" alt=""></a></div>
+    <script>
+        let moveblock=document.getElementById("mytank")
+   window.document.oncontextmenu = function(){ 
+    return false;
+    } 
+   document.onkeydown=function(e){//传入事件对象e 
+    let evt=e||event;
+    let current = 0;
+    switch(evt.keyCode){
+     case 87://向上
+     moveblock.style.top=moveblock.offsetTop-5+"px";
+     current = 270;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+     break;
+     case 83://向下
+     current = 90;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+     moveblock.style.top=moveblock.offsetTop+5+"px";
+     break;
+     case 65://向左
+     moveblock.style.left=moveblock.offsetLeft-5+"px";
+     current = 180;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+     break;
+     case 68://向右
+     moveblock.style.left=moveblock.offsetLeft+5+"px";
+     current = 0;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+    
+   }
+  }
+
+    </script>
+</body>
+</html>

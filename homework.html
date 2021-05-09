@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <script>
+      //189000860 周豪
+
+      /*   function num(){
+            a = 1;
+            console.log(a);
+        }
+        num();
+ */ // 189000860 周豪
+      // (1). Number()
+      console.log(Number(true), Number(null), +undefined);
+      //(2).Boolean()
+      console.log(Boolean("100"), Boolean(100), Boolean(null), !!undefined);
+      //(3).parselnt()
+      console.log(
+        parseInt(123.6),
+        parseInt(0b1011011),
+        parseInt(0x2a),
+        parseInt(0x2a, 8)
+      );
+      //(4).parseFloat()
+      console.log(parseFloat("123.6"), parseFloat("100px"), parseFloat(010));
+      //(5).eval()
+      console.log(eval("87*99+2"));
+      //(6).isNaN
+      console.log(isNaN(null), isNaN("123"), isNaN("abc"), isNaN("a1b2c3"));
+
+      var arr1 = [];
+      console.log(arr1, arr1.length);
+
+      var arr2 = [1, 2, 3];
+      console.log(arr2[0], arr2.length);
+
+      var arr3 = new Array();
+      console.log(arr3[1], arr3.length);
+
+      arr2.shift(); //删除数组的第一个元素
+      console.log(arr2);
+
+      console.log(new Date()); //获取当前时间
+
+      var reg1 = /^\d{4}$/;
+      console.log(reg1.test("1234"), reg1.test("1a34"), reg1.test("12345"));
+
+      var reg2 = new RegExp("^[sp]\\d{1,4}$", "i");
+      console.log(reg2.test("p123"), reg2.test("1234"), reg2.test("S10"));
+
+      function checkPhone() {
+        var phone = document.getElementsByClassName("phone").value;
+        if (!/^1(3|4|5|6|7|8|9)d{9}$/.test(phone)) {
+          alert("手机号码有误，请重填");
+          return false;
+        }
+        checkPhone();
+      }
+
+      var str1 = "1109818477@qq.com";
+      var arr = str1.split(/[a-zA-Z@]/);
+      var len = arr.length;
+      var str2 = "";
+      for (var i = 0; i < len; i++) {
+        str2 += arr[i];
+      }
+      alert(str2);
+
+      var num = Math.floor(Math.random() * 3 + 1);
+
+      alert(num); //所得到的的是1-3之间的随机数，每次刷新都不同
+
+      var x = 1;
+      function A(y) {
+        var x = 2;
+        function B(z) {
+          console.log(x + y + z); //7
+        }
+        return B;
+      }
+      var C = A(2);
+      C(3);
+    </script> -->
+
+    <script>
+        //字面量创建 
+      var obj1 = {
+        name: "刘备",
+        sex: "男",
+        run: function () {
+          console.log("跑");
+        },
+      };
+
+      //object创建对象 189000860周豪
+      var obj2 = new Object();
+      obj2.name = "刘备";
+      obj2.sex = "男";
+      console.log(obj2.name + "是" + obj2.sex + "的");
+
+      
+      //3.工厂模式 189000860周豪
+      function createPerson(p_name, p_sex, p_run) {
+        var tempPerson = new Object();
+
+        tempPerson.name = p_name;
+        tempPerson.sex = p_sex;
+        tempPerson.run = p_run;
+        return tempPerson;
+      }
+
+      var obj3 = createPerson("刘备", "男", new Function("console.log('跑')"));
+
+      var obj4 = createPerson("张飞", "男", new Function("console.log('跳')"));
+    console.log(obj3);
+    console.log(obj4);
+
+    //使用构造函数创建对象 189000860周豪
+    function Student(name,sex) {
+        this.name = name;
+        this.sex = sex;
+        this.run = function() {
+            console.log(this.name + "跑");
+        }
+    }
+    var obj5 = new Student("盲僧","男");
+    console.log(obj5);
+    obj5.run();
+
+   
+   //原型模式创建对象 189000860周豪
+    function Person() {  
+    }
+    Person.prototype.name = "刘备";
+    Person.prototype.sex = "男";
+    Person.prototype.run = function() {
+        console.log(this.name + "跑");
+    };
+    var obj6 = new Person();
+    console.log(obj6);
+    obj6.run();
+
+    
+    
+    function fun() {
+        console.log(this);
+    }
+    fun(); //this指向window。
+    //因为此处的this没有明确的当前对象 189000860周豪
+    
+    //7 189000860周豪
+    function Person(name){
+        this.name = name;
+    }
+    function Worker(name,salary){
+        Person.call(this,name);
+        this.salary = salary;
+    }
+    var obj7 = new Worker("赵云",100);
+    console.log(obj7);
+
+    
+
+    function Animal(dogname) {
+        this.name = dogname;
+    }
+    function Worker(name) {
+        Animal.call(this,name);
+
+    }
+    var obj8 = new Worker("二哈");
+    console.log(obj8);
+ 
+    
+    //8. 189000860周豪
+    function Person(name) {
+         this.name = name;
+     }
+     Person.prototype.run = function() {
+         console.log("跑");
+     }
+     function Worker(name,salary) {
+        Person.call(this,name);
+        this.salary = salary;
+     }
+     Worker.prototype = new Person();
+     var obj4 = new Worker("赵云",100);
+     console.log(obj4);
+     //用call将person.name变量指向worker下的this
+     //Worker.prototype继承 Person对象 
+     //从而也继承Person.prototype地址
+
+     //9 189000860周豪
+     let person1 = {
+         name: "刘备",
+         sex: "男",
+         run: function(){
+             console.log("跑");
+         }
+     }
+     let person2 = Object.create(person1);
+     //Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
+     console.log(person2);
+
+     //10 189000860周豪
+     function inheritPrototype(sFun,pFun){
+         let myPrototype = new Object(pFun.prototype);//object创建  
+         myPrototype.constructor = sFun;
+         sFun.prototype = myPrototype;
+     }
+
+     function Person(name){
+         this.name = name;
+     }
+     Person.prototype.run = function() {
+         console.log("跑");
+     }
+     function Worker(name,salary) {
+         Person.call(this,name);
+         this.salary = salary;
+     }
+     inheritPrototype(Worker,Person);
+     let worker1 = new Worker("赵云",100);
+     console.log(worker1);
+
+     
+     
+     
+     let a1,b1,c1 = [1,2,3];
+     console.log(a1,b1,c1);
+
+     let [a2,b2,c2] = [1,2,3];
+     console.log(a2,b2,c2);
+     let [a3,b3,c3] = [1,,3];
+     console.log(a3,b3,c3);
+
+     let [a4,b4] = [1];
+     console.log(a4,b4);
+
+     let {y:a5,b5} = {x: 1,y: 2};
+     console.log(a5,b5);
+     let {a6,b6} = 123;
+     console.log(a6,b6);
+     
+     
+     
+     let set = new Set();
+     set.add(1);
+     set.add(2);
+     set.add(3);
+     set.delete(2);
+
+     let i = set.values();
+     console.log(i.next());
+     console.log(i.next());
+     console.log(i.next());
+
+
+     let map = new Map();
+map.set(1,"a");
+map.set(2,"b");
+map.set(3,"c");
+map.set(4,"d");
+
+for (let i = 1; i <=map.size;i++) {
+    console.log(map.get(i));
+}
+map.forEach(function(value,key){
+    console.log(value);
+});
+for(let v of map.values()){
+    console.log(v);
+}
+for(var prop in map){
+    console.log(prop);
+}
+//将 in改为of就可以遍历
+
+
+let arr1 = [1,2,3];
+
+let arr2 = arr1;
+console.log(arr1==arr2);//true
+
+let arr3 = [...arr1];
+console.log(arr1==arr3);//false
+
+//5 189000860
+let arr4 = [1,2,3];
+arr4.forEach(function(v,k) {
+    console.log(v);
+})
+
+arr4.forEach((v,k) => {
+    console.log(v);
+})
+
+
+//6
+Array.of(1,2,3).filter(i => i > 1).forEach(i => console.log(i));
+
+let fib =  n => n > 1 ? fib(n - 1) + fib(n-2) : n;
+
+
+class Animal{
+            constructor(name){
+                this.name = name;
+            }
+            shount(){
+                console.log("汪");
+            }
+        }
+        class Dog extends Animal{
+            constructor(name,age){
+                super(name);
+                this.age = age;
+            }
+            eat(){
+                console.log("肉");
+            }
+        }
+        let p1 = new Dog("小",12);
+        console.log(p1);
+        p1.shount();
+        p1.eat();
+    </script>
+  </body>
+</html>
