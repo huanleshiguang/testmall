@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>让坦克开起来</title>
+		<style type="text/css">
+			input{font-size:26px;margin-top: 20px;}
+			body{background-image: url(images/grassland.png);}
+			#mytank{position: absolute;left:10px;top:100px}
+		</style>
+	</head>
+	<body>		
+		<img id="mytank" src="images/right.png"/>
+		<script>
+			// 编写代码，让坦克能上下左右移动
+            //禁止右键
+            let moveblock=document.getElementById("mytank")
+   window.document.oncontextmenu = function(){ 
+    return false;
+    } 
+   document.onkeydown=function(e){//传入事件对象e 
+    let evt=e||event;
+    let current = 0;
+    switch(evt.keyCode){
+     case 87://向上
+     moveblock.style.top=moveblock.offsetTop-5+"px";
+     current = 270;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+     break;
+     case 83://向下
+     current = 90;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+     moveblock.style.top=moveblock.offsetTop+5+"px";
+     break;
+     case 65://向左
+     moveblock.style.left=moveblock.offsetLeft-5+"px";
+     current = 180;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+     break;
+     case 68://向右
+     moveblock.style.left=moveblock.offsetLeft+5+"px";
+     current = 0;//需要反转的角度
+     moveblock.style.transform = 'rotate('+current+'deg)';
+    
+   }
+  }
+		</script>
+	</body>
+</html>
+
