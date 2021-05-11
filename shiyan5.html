@@ -52,7 +52,7 @@
         </a>
         <ul id="menu1">
           <li id="btn1"><img src="img/doc.gif" />获取原始图片路径</li>
-          <li><img src="img/doc.gif" />获取我喜欢的水果</li>
+          <li id="myenjoy"><img src="img/doc.gif" />获取我喜欢的水果</li>
         </ul>
       </ul>
 
@@ -74,43 +74,36 @@
         </a>
         <ul id="menu3">
           <li id="addsty"><img src="img/doc.gif" />为原始图片加上行间样式</li>
-          <li><img src="img/doc.gif" />为所有的fieldset加上内部样式</li>
+          <li id="fie">
+            <img src="img/doc.gif" />为所有的fieldset加上内部样式
+          </li>
         </ul>
       </ul>
     </div>
-    <fieldset>
+    <fieldset id="bgc" class="bgc1">
       <legend>原始图片</legend>
       <img id="fruit" src="img/fruit.jpg" />
     </fieldset>
-    <fieldset>
+    <fieldset id="bgc">
       <legend>图片路径</legend>
       <p id="msg1">在这里显示</p>
     </fieldset>
-    <fieldset>
+    <fieldset id="bgc">
       <legend>选择你喜欢的水果</legend>
       <ul style="text-align: left">
         <li><input name="enjoy" type="checkbox" value="苹果" />苹果</li>
-        <li>
-          <input
-            name="enjoy"
-            type="checkbox"
-            value="香蕉"
-            checked="checked"
-          />香蕉
-        </li>
+        <li><input name="enjoy" type="checkbox" value="香蕉" />香蕉</li>
         <li><input name="enjoy" type="checkbox" value="葡萄" />葡萄</li>
-        <li>
-          <input name="enjoy" type="checkbox" value="梨" checked="checked" />梨
-        </li>
+        <li><input name="enjoy" type="checkbox" value="梨" />梨</li>
         <li><input name="enjoy" type="checkbox" value="西瓜" />西瓜</li>
       </ul>
       <div id="msg2" style="margin-top: 10px; text-align: left"></div>
     </fieldset>
-    <fieldset>
+    <fieldset id="bgc">
       <legend>创建图片</legend>
       <div id="msg3"></div>
     </fieldset>
-    <fieldset>
+    <fieldset id="bgc">
       <legend>克隆图片</legend>
       <div id="msg4"></div>
     </fieldset>
@@ -130,7 +123,24 @@
         let fruit = document.querySelector("#fruit");
         msg1.innerHTML = fruit.src;
       };
+
       //选择你喜欢的水果
+      let myenjoy = document.querySelector("#myenjoy");
+      let msg2 = document.querySelector("#msg2");
+      let obj = document.getElementsByName("enjoy"); //选择所有name="enjoy"的对象，返回数组
+      let s = []; //如果这样定义var s;变量s中会默认被赋个null值
+      myenjoy.onclick = function () {
+        for (let i = 0; i < obj.length; i++) {
+          if (obj[i].checked)
+            //取到对象数组后，我们来循环检测它是不是被选中
+            s.push(obj[i].value); //如果选中，将value添加到s中
+            msg2.innerHTML = "你喜欢的水果是:"+s;
+            
+            
+        }
+      }
+      
+      
 
       //创建图片
       let bt = document.querySelector("#bt");
@@ -141,30 +151,41 @@
       //克隆图片
       let kl = document.querySelector("#kl");
       kl.onclick = function () {
-       let msg4 = document.querySelector("#msg4");
-       msg4.innerHTML = "<img src='img/fruit.jpg' />";
+        let msg4 = document.querySelector("#msg4");
+        msg4.innerHTML = "<img src='img/fruit.jpg' />";
       };
       //改变图片
-    let change = document.getElementById("change");  
-    change.onclick = function changeImg() { 
+      let change = document.getElementById("change");
+      change.onclick = function changeImg() {
         let fruit = document.querySelector("#fruit");
-    if (fruit.getAttribute("src") == "img/fruit.jpg") {
-        fruit.setAttribute("src", "img/grape.jpg");     
-    }
-     
-}
+        if (fruit.getAttribute("src") == "img/fruit.jpg") {
+          fruit.setAttribute("src", "img/grape.jpg");
+        }
+      };
       //删除图片
       let del = document.querySelector("#del");
-      del.onclick = function(){
-        let msg1 = document.querySelector("#msg1");
-        let fruit = document.querySelector("#fruit");
-        
-      }
+      let fruit = document.querySelector("#fruit");
+
+      del.addEventListener("click", function () {
+        //删除图片
+        fruit.src = "";
+      });
       //为原始图片加上行间样式
       let addsty = document.querySelector("#addsty");
-      addsty.onclick = function(){
-          
-      }
+      addsty.onclick = function () {
+        let bgc1 = document.querySelector(".bgc1");
+        bgc1.style.border = "solid 4px red";
+      };
+
+      //为所有的fieldset加上内部样式
+
+      let fie = document.querySelector("#fie");
+      fie.onclick = function () {
+        let bgc = document.querySelectorAll("#bgc");
+        for (i = 0; i < bgc.length; i++) {
+          bgc[i].style.background = "blue";
+        }
+      };
     </script>
   </body>
 </html>
